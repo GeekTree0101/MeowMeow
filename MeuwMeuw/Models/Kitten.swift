@@ -1,12 +1,13 @@
 import Foundation
 import UIKit
 
-struct Kitten {
+class Kitten {
     let id: String
     var image: UIImage
     var title: String
     var content: String
     var user: User?
+    var isFavorite: Bool = false
     
     init(_ id: String,
          image: UIImage,

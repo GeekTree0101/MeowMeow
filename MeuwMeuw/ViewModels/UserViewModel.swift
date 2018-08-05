@@ -9,6 +9,8 @@ class UserViewModel {
     var bio: Observable<String>
     
     init(_ user: User) {
+        UserProvider.update(user)
+        
         let observable = UserProvider.observer
             .filterNil()
             .startWith(user)
@@ -19,7 +21,5 @@ class UserViewModel {
         image = observable.map { $0.profileImage}
         name = observable.map { $0.username }
         bio = observable.map { $0.bio }
-        
-        UserProvider.update(user)
     }
 }

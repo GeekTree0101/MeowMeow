@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-struct User {
+class User {
     var profileImage: UIImage
     var username: String
     var bio: String

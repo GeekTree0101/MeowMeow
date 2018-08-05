@@ -12,6 +12,8 @@ class KittenCellNode: ASCellNode {
         node.backgroundColor = .white
         node.isOpaque = true
         node.placeholderColor = .lightGray
+        node.style.flexGrow = 1.0
+        node.style.flexShrink = 1.0
         return node
     }()
     
@@ -25,6 +27,8 @@ class KittenCellNode: ASCellNode {
         node.truncationAttributedText =
             NSAttributedString(string: " ...More",
                                attributes: KittenCellNode.moreSeeAttr)
+        node.style.flexGrow = 1.0
+        node.style.flexShrink = 1.0
         return node
     }()
     
@@ -33,6 +37,19 @@ class KittenCellNode: ASCellNode {
         node.contentMode = .scaleAspectFill
         node.cornerRadius = 10.0
         node.backgroundColor = .lightGray
+        node.style.flexGrow = 0.0
+        node.style.flexShrink = 1.0
+        return node
+    }()
+    
+    let favoriteNode: ASButtonNode = {
+        let node = ASButtonNode()
+        node.setImage(#imageLiteral(resourceName: "star"), for: .selected)
+        node.setImage(#imageLiteral(resourceName: "star").applyNewColor(with: .white), for: .normal)
+        node.imageNode.style.preferredSize = .init(width: 30.0, height: 30.0)
+        node.style.preferredSize = .init(width: 60.0, height: 60.0)
+        node.imageNode.contentMode = .scaleAspectFit
+        node.cornerRadius = 10.0
         return node
     }()
     
@@ -49,30 +66,38 @@ class KittenCellNode: ASCellNode {
         self.bindViewModel(viewModel)
     }
     
-    override func animateLayoutTransition(_ context: ASContextTransitioning) {
-        imageNode.transform = CATransform3DMakeScale(0.8, 0.8, 1.0)
-        UIView.animate(withDuration: 0.5,
-                       delay: 0.0,
-                       usingSpringWithDamping: 0.5,
-                       initialSpringVelocity: 3.0,
-                       options: .curveEaseInOut,
-                       animations: {
-                        self.imageNode.transform = CATransform3DIdentity
-        }, completion: nil)
-    }
-    
     func bindViewModel(_ viewModel: KittenViewModel) {
         viewModel.image
             .bind(to: imageNode.rx.image,
                   setNeedsLayout: self)
             .disposed(by: disposeBag)
+        
         viewModel.title
             .bind(to: titleNode.rx.text(KittenCellNode.titleAttr),
                   setNeedsLayout: self)
             .disposed(by: disposeBag)
+        
         viewModel.content
             .bind(to: contentNode.rx.text(KittenCellNode.contentAttr),
                   setNeedsLayout: self)
+            .disposed(by: disposeBag)
+        
+        viewModel.isFavorite
+            .distinctUntilChanged({ [weak self] prev, present -> Bool in
+                if !prev, present {
+                    self?.favoriteNode.transform = CATransform3DMakeScale(1.5, 1.5, 1.0)
+                    UIView.animate(withDuration: 0.5,
+                                   delay: 0.0,
+                                   usingSpringWithDamping: 0.5,
+                                   initialSpringVelocity: 4.0,
+                                   options: .curveEaseIn,
+                                   animations: {
+                        self?.favoriteNode.transform = CATransform3DIdentity
+                    }, completion: nil)
+                }
+                return false
+            })
+            .bind(to: favoriteNode.rx.isSelected)
             .disposed(by: disposeBag)
         
         contentNode.rx.tap
@@ -86,20 +111,26 @@ class KittenCellNode: ASCellNode {
                 self.setNeedsLayout()
             }).disposed(by: disposeBag)
         
-        imageNode.rx.tap
+        favoriteNode.rx.tap
             .throttle(0.5, scheduler: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] _ in
-                self?.transitionLayout(withAnimation: true,
-                                       shouldMeasureAsync: true,
-                                       measurementCompletion: nil)
-            }).disposed(by: disposeBag)
+            .bind(to: viewModel.didTapFavorite)
+            .disposed(by: disposeBag)
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let imageRatioLayout = ASRatioLayoutSpec(ratio: imageRatio, child: imageNode)
-        let elements: [ASLayoutElement] = [imageRatioLayout,
+        let favoriteLayout = ASRelativeLayoutSpec(horizontalPosition: .end,
+                                                  verticalPosition: .start,
+                                                  sizingOption: [],
+                                                  child: favoriteNode)
+        let favriteOverlayedImageLayout =
+            ASOverlayLayoutSpec(child: imageRatioLayout,
+                                overlay: favoriteLayout)
+        
+        let elements: [ASLayoutElement] = [favriteOverlayedImageLayout,
                                            titleNode,
                                            contentNode]
+        
         titleNode.style.spacingBefore = 10.0
         contentNode.style.spacingBefore = 5.0
         

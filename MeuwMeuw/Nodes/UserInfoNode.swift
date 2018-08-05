@@ -7,11 +7,10 @@ class UserInfoNode: ASDisplayNode {
     
     lazy var imageNode: ASImageNode = {
         let node = ASImageNode()
-        node.clipsToBounds = true
         node.style.preferredSize = self.type.profileSize
         node.cornerRadius = self.type.profileSize.height / 2.0
         node.borderWidth = 1.0
-        node.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
+        node.borderColor = UIColor.paw(alpha: 0.5).cgColor
         return node
     }()
     
@@ -55,6 +54,31 @@ class UserInfoNode: ASDisplayNode {
         self.automaticallyManagesSubnodes = true
         self.backgroundColor = .white
         self.isOpaque = true
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.1, animations: {
+            self.imageNode.transform = CATransform3DMakeScale(0.8, 0.8, 1.0)
+            self.imageNode.alpha = 0.8
+        }, completion: nil)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>,
+                               with event: UIEvent?) {
+        self.resetTransform(0.1)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>?,
+                                   with event: UIEvent?) {
+        self.resetTransform(0.1)
+    }
+    
+    private func resetTransform(_ duration: TimeInterval) {
+        UIView.animate(withDuration: duration, animations: {
+            self.imageNode.transform = CATransform3DIdentity
+            self.imageNode.alpha = 1.0
+        }, completion: nil)
     }
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {

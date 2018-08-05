@@ -95,7 +95,7 @@ class KittenWelcomeCellNode: ASCellNode {
                               child: scrollNode)
         
         return ASStackLayoutSpec(direction: .vertical,
-                                            spacing: 15.0,
+                                            spacing: 25.0,
                                             justifyContent: .start,
                                             alignItems: .stretch,
                                             children: [titleInsetLayout,
