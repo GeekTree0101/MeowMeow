@@ -49,7 +49,9 @@ class PawNode: ASButtonNode {
         UIView.animate(withDuration: 0.5, animations: {
             self.transform = CATransform3DMakeTranslation(1.0, 100.0, 1.0)
             self.alpha = 0.0
-        }, completion: nil)
+        }, completion: { _ in
+            self.isHidden = true
+        })
     }
     
     func show() {
@@ -57,6 +59,7 @@ class PawNode: ASButtonNode {
     }
     
     private func resetTransform(_ duration: TimeInterval) {
+        self.isHidden = false
         UIView.animate(withDuration: duration, animations: {
             self.transform = CATransform3DIdentity
             self.alpha = 1.0

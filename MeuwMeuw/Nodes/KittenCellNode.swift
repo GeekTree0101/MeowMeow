@@ -3,6 +3,8 @@ import AsyncDisplayKit
 import RxCocoa
 import RxSwift
 import RxCocoa_Texture
+import RxOptional
+import Hero
 
 class KittenCellNode: ASCellNode {
     
@@ -55,9 +57,10 @@ class KittenCellNode: ASCellNode {
     
     let disposeBag = DisposeBag()
     private let imageRatio: CGFloat
-    
+    private let id: String
     init(_ viewModel: KittenViewModel) {
         imageRatio = viewModel.ratio
+        self.id = viewModel.id
         super.init()
         self.selectionStyle = .none
         self.automaticallyManagesSubnodes = true
@@ -117,6 +120,12 @@ class KittenCellNode: ASCellNode {
             .disposed(by: disposeBag)
     }
     
+    override func didLoad() {
+        super.didLoad()
+        self.imageNode.applyHero(.catImage(id), modifier: nil)
+        self.titleNode.applyHero(.title(id), modifier: nil)
+    }
+    
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         let imageRatioLayout = ASRatioLayoutSpec(ratio: imageRatio, child: imageNode)
         let favoriteLayout = ASRelativeLayoutSpec(horizontalPosition: .end,
@@ -127,9 +136,15 @@ class KittenCellNode: ASCellNode {
             ASOverlayLayoutSpec(child: imageRatioLayout,
                                 overlay: favoriteLayout)
         
-        let elements: [ASLayoutElement] = [favriteOverlayedImageLayout,
-                                           titleNode,
-                                           contentNode]
+        var elements: [ASLayoutElement] = [favriteOverlayedImageLayout]
+        
+        if titleNode.attributedText?.string.count ?? 0 > 0 {
+            elements.append(titleNode)
+        }
+        
+        if contentNode.attributedText?.string.count ?? 0 > 0 {
+            elements.append(contentNode)
+        }
         
         titleNode.style.spacingBefore = 10.0
         contentNode.style.spacingBefore = 5.0

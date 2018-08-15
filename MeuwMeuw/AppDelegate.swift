@@ -1,12 +1,5 @@
-//
-//  AppDelegate.swift
-//  MeuwMeuw
-//
-//  Created by Vingle on 2018. 8. 4..
-//  Copyright © 2018년 Geektree0101. All rights reserved.
-//
-
 import UIKit
+import Hero
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,9 +10,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootViewController = HomeFeedNodeController()
+        let rootViewController = KittenMainController()
         let navigationController =
             UINavigationController(rootViewController: rootViewController)
+        navigationController.applyHero(present: .slide(direction: .left),
+                                       dismiss: .slide(direction: .right))
         if let window = window {
             window.rootViewController = navigationController
             window.makeKeyAndVisible()

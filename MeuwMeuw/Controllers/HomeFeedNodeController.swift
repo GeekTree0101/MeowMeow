@@ -1,5 +1,8 @@
 import Foundation
 import AsyncDisplayKit
+import RxSwift
+import RxCocoa
+import RxOptional
 
 class HomeFeedNodeController: ASViewController<ASDisplayNode> {
     
@@ -26,6 +29,7 @@ class HomeFeedNodeController: ASViewController<ASDisplayNode> {
     
     required init() {
         super.init(node: ASDisplayNode())
+        self.hero.isEnabled = true
         self.node.backgroundColor = .white
         self.node.isOpaque = true
         self.node.automaticallyManagesSubnodes = true
@@ -46,7 +50,7 @@ class HomeFeedNodeController: ASViewController<ASDisplayNode> {
         let tableInsetLayout = ASInsetLayoutSpec(insets: .zero, child: self.tableNode)
         let pawInsets: UIEdgeInsets = .init(top: .infinity,
                                             left: .infinity,
-                                            bottom: 20.0,
+                                            bottom: KittenMainController.Const.tabBarHeight,
                                             right: 20.0)
         let pawInsetLayout = ASInsetLayoutSpec(insets: pawInsets,
                                                child: pawNode)
@@ -62,6 +66,12 @@ class HomeFeedNodeController: ASViewController<ASDisplayNode> {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard self.pawNode.isHidden else { return }
+        self.pawNode.show()
     }
     
     override func viewDidLoad() {
@@ -80,7 +90,27 @@ extension HomeFeedNodeController: ASTableDelegate {
     }
     
     func tableNode(_ tableNode: ASTableNode, didSelectRowAt indexPath: IndexPath) {
-        
+        guard let section = Section.init(rawValue: indexPath.section) else { return }
+        switch section {
+        case .feed:
+            guard indexPath.row < self.viewModels.count else { return }
+            let viewModel = self.viewModels[indexPath.row]
+            self.openCatShow(viewModel)
+        case .welcome:
+            break
+        }
+    }
+    
+    func openCatShow(_ kittenViewModel: KittenViewModel) {
+        self.pawNode.hide()
+        let viewController = KittenShowNodeController(kittenViewModel)
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func openUserShow(_ userViewModel: UserViewModel) {
+        self.pawNode.hide()
+        let viewController = ProfileNodeController(userViewModel)
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -105,7 +135,12 @@ extension HomeFeedNodeController: ASTableDataSource {
             
             switch section {
             case .welcome:
-                return KittenWelcomeCellNode()
+                let cellNode = KittenWelcomeCellNode(screenType: .home)
+                cellNode.rx.didTapProfile.filterNil()
+                    .subscribe(onNext: { [weak self] viewModel in
+                        self?.openUserShow(viewModel)
+                    }).disposed(by: cellNode.disposeBag)
+                return cellNode
             case .feed:
                 guard indexPath.row < self.viewModels.count else { return ASCellNode() }
                 let viewModel = self.viewModels[indexPath.row]

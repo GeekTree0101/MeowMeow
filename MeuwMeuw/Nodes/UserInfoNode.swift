@@ -20,6 +20,8 @@ class UserInfoNode: ASDisplayNode {
         return node
     }()
     
+    let bioNode: ASTextNode = ASTextNode()
+    
     enum ScreenType {
         case compact
         case profile
@@ -29,7 +31,7 @@ class UserInfoNode: ASDisplayNode {
             case .compact:
                 return .init(width: 50.0, height: 50.0)
             case .profile:
-                return .init(width: 80.0, height: 80.0)
+                return .init(width: 100.0, height: 100.0)
             }
         }
         
@@ -39,8 +41,18 @@ class UserInfoNode: ASDisplayNode {
                 return [.font: UIFont.systemFont(ofSize: 15.0),
                         .foregroundColor: UIColor.username()]
             case .profile:
-                return [.font: UIFont.systemFont(ofSize: 20.0),
+                return [.font: UIFont.systemFont(ofSize: 30.0),
                         .foregroundColor: UIColor.username()]
+            }
+        }
+        
+        var bioAttr: [NSAttributedStringKey: Any] {
+            switch self {
+            case .compact:
+                return [:]
+            case .profile:
+                return [.font: UIFont.systemFont(ofSize: 20.0),
+                        .foregroundColor: UIColor.lightGray]
             }
         }
     }
@@ -58,6 +70,7 @@ class UserInfoNode: ASDisplayNode {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard type == .compact else { return }
         UIView.animate(withDuration: 0.1, animations: {
             self.imageNode.transform = CATransform3DMakeScale(0.8, 0.8, 1.0)
             self.imageNode.alpha = 0.8
@@ -66,11 +79,13 @@ class UserInfoNode: ASDisplayNode {
     
     override func touchesEnded(_ touches: Set<UITouch>,
                                with event: UIEvent?) {
+        guard type == .compact else { return }
         self.resetTransform(0.1)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>?,
                                    with event: UIEvent?) {
+        guard type == .compact else { return }
         self.resetTransform(0.1)
     }
     
@@ -90,7 +105,13 @@ class UserInfoNode: ASDisplayNode {
                                      alignItems: .center,
                                      children: [imageNode, nameNode])
         default:
-            return ASLayoutSpec()
+            imageNode.style.spacingAfter = 20.0
+            nameNode.style.spacingAfter = 15.0
+            return ASStackLayoutSpec(direction: .vertical,
+                                     spacing: 0.0,
+                                     justifyContent: .start,
+                                     alignItems: .center,
+                                     children: [imageNode, nameNode, bioNode])
         }
     }
 }

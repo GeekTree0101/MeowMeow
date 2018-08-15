@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import RxCocoa_Texture
 
 class User {
     var profileImage: UIImage
@@ -10,5 +11,11 @@ class User {
         self.username = name
         self.profileImage = image
         self.bio = bio
+    }
+}
+
+extension User: ASRenderModelProtocol {
+    var renderModelIdentifier: ASRenderModelIdentifier {
+        return .init(username, type: User.self)
     }
 }

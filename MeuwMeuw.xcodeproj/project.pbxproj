@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6B0DB32123D87200BB8BF9 /* Hero+Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6B0DB22123D87200BB8BF9 /* Hero+Kitten.swift */; };
+		9B6C23892123DB4600129E2F /* UINavigationBar+Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C23882123DB4600129E2F /* UINavigationBar+Kitten.swift */; };
+		9B6C238B2123E6EA00129E2F /* String+Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C238A2123E6EA00129E2F /* String+Kitten.swift */; };
+		9B6C238D2123F1E900129E2F /* KittenMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C238C2123F1E900129E2F /* KittenMainController.swift */; };
+		9B6C238F2123F89D00129E2F /* UITabBar+Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C238E2123F89D00129E2F /* UITabBar+Kitten.swift */; };
 		9B876DF321155016002D0B33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876DF221155016002D0B33 /* AppDelegate.swift */; };
 		9B876DFD21155018002D0B33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B876DFB21155018002D0B33 /* LaunchScreen.storyboard */; };
 		9B876E0821155018002D0B33 /* MeuwMeuwTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E0721155018002D0B33 /* MeuwMeuwTests.swift */; };
@@ -17,11 +22,9 @@
 		9B876E1F2115533F002D0B33 /* Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E1E2115533F002D0B33 /* Kitten.swift */; };
 		9B876E2421155522002D0B33 /* KittenMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E2321155522002D0B33 /* KittenMock.swift */; };
 		9B876E27211559CA002D0B33 /* KittenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E26211559CA002D0B33 /* KittenViewModel.swift */; };
-		9B876E2A21155B53002D0B33 /* KittenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E2921155B53002D0B33 /* KittenProvider.swift */; };
 		9B876E2C21155D14002D0B33 /* KittenCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E2B21155D14002D0B33 /* KittenCellNode.swift */; };
 		9B876E302115666E002D0B33 /* KittenWelcomeCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E2F2115666E002D0B33 /* KittenWelcomeCellNode.swift */; };
 		9B876E3221156BBE002D0B33 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E3121156BBE002D0B33 /* User.swift */; };
-		9B876E3421156DE4002D0B33 /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E3321156DE4002D0B33 /* UserProvider.swift */; };
 		9B876E3621156ED9002D0B33 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E3521156ED9002D0B33 /* UserViewModel.swift */; };
 		9B876E3821156F80002D0B33 /* KittenWelcomCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E3721156F80002D0B33 /* KittenWelcomCellViewModel.swift */; };
 		9B876E3A2115702F002D0B33 /* UserInfoNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E392115702F002D0B33 /* UserInfoNode.swift */; };
@@ -45,6 +48,11 @@
 /* Begin PBXFileReference section */
 		47575E0CB8EB751EF2E820C5 /* Pods-MeuwMeuw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeuwMeuw.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeuwMeuw/Pods-MeuwMeuw.debug.xcconfig"; sourceTree = "<group>"; };
 		888C8853F1E1625B620DC56E /* Pods-MeuwMeuw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeuwMeuw.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeuwMeuw/Pods-MeuwMeuw.release.xcconfig"; sourceTree = "<group>"; };
+		9B6B0DB22123D87200BB8BF9 /* Hero+Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hero+Kitten.swift"; sourceTree = "<group>"; };
+		9B6C23882123DB4600129E2F /* UINavigationBar+Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Kitten.swift"; sourceTree = "<group>"; };
+		9B6C238A2123E6EA00129E2F /* String+Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Kitten.swift"; sourceTree = "<group>"; };
+		9B6C238C2123F1E900129E2F /* KittenMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenMainController.swift; sourceTree = "<group>"; };
+		9B6C238E2123F89D00129E2F /* UITabBar+Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Kitten.swift"; sourceTree = "<group>"; };
 		9B876DEF21155016002D0B33 /* MeuwMeuw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeuwMeuw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B876DF221155016002D0B33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B876DFC21155018002D0B33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -59,11 +67,9 @@
 		9B876E1E2115533F002D0B33 /* Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kitten.swift; sourceTree = "<group>"; };
 		9B876E2321155522002D0B33 /* KittenMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenMock.swift; sourceTree = "<group>"; };
 		9B876E26211559CA002D0B33 /* KittenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenViewModel.swift; sourceTree = "<group>"; };
-		9B876E2921155B53002D0B33 /* KittenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenProvider.swift; sourceTree = "<group>"; };
 		9B876E2B21155D14002D0B33 /* KittenCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenCellNode.swift; sourceTree = "<group>"; };
 		9B876E2F2115666E002D0B33 /* KittenWelcomeCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenWelcomeCellNode.swift; sourceTree = "<group>"; };
 		9B876E3121156BBE002D0B33 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		9B876E3321156DE4002D0B33 /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		9B876E3521156ED9002D0B33 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9B876E3721156F80002D0B33 /* KittenWelcomCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenWelcomCellViewModel.swift; sourceTree = "<group>"; };
 		9B876E392115702F002D0B33 /* UserInfoNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoNode.swift; sourceTree = "<group>"; };
@@ -124,7 +130,6 @@
 		9B876DF121155016002D0B33 /* MeuwMeuw */ = {
 			isa = PBXGroup;
 			children = (
-				9B876E2821155B48002D0B33 /* DataProvider */,
 				9B876E25211559BA002D0B33 /* ViewModels */,
 				9B876E2021155367002D0B33 /* Extensions */,
 				9B876E1521155279002D0B33 /* Nodes */,
@@ -155,6 +160,7 @@
 				9B876E18211552DB002D0B33 /* FavoriteFeedNodeController.swift */,
 				9B876E1A21155302002D0B33 /* ProfileNodeController.swift */,
 				9B876E1C21155318002D0B33 /* KittenShowNodeController.swift */,
+				9B6C238C2123F1E900129E2F /* KittenMainController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -192,6 +198,10 @@
 			children = (
 				9B876E3B2115788B002D0B33 /* UIColor+Kitten.swift */,
 				9B876E3F21157DF1002D0B33 /* UIImage+Kitten.swift */,
+				9B6B0DB22123D87200BB8BF9 /* Hero+Kitten.swift */,
+				9B6C23882123DB4600129E2F /* UINavigationBar+Kitten.swift */,
+				9B6C238A2123E6EA00129E2F /* String+Kitten.swift */,
+				9B6C238E2123F89D00129E2F /* UITabBar+Kitten.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -204,15 +214,6 @@
 				9B876E3721156F80002D0B33 /* KittenWelcomCellViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		9B876E2821155B48002D0B33 /* DataProvider */ = {
-			isa = PBXGroup;
-			children = (
-				9B876E2921155B53002D0B33 /* KittenProvider.swift */,
-				9B876E3321156DE4002D0B33 /* UserProvider.swift */,
-			);
-			path = DataProvider;
 			sourceTree = "<group>";
 		};
 		CFA704E7322FD64075846A5D /* Pods */ = {
@@ -330,6 +331,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MeuwMeuw/Pods-MeuwMeuw-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/PINCache/PINCache.framework",
 				"${BUILT_PRODUCTS_DIR}/PINOperation/PINOperation.framework",
 				"${BUILT_PRODUCTS_DIR}/PINRemoteImage/PINRemoteImage.framework",
@@ -343,6 +345,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINOperation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PINRemoteImage.framework",
@@ -392,16 +395,19 @@
 				9B876E1F2115533F002D0B33 /* Kitten.swift in Sources */,
 				9B876E3621156ED9002D0B33 /* UserViewModel.swift in Sources */,
 				9B876E2421155522002D0B33 /* KittenMock.swift in Sources */,
+				9B6C23892123DB4600129E2F /* UINavigationBar+Kitten.swift in Sources */,
 				9B876E4221157E11002D0B33 /* PawNode.swift in Sources */,
-				9B876E3421156DE4002D0B33 /* UserProvider.swift in Sources */,
 				9B876E1B21155302002D0B33 /* ProfileNodeController.swift in Sources */,
 				9B876E17211552CE002D0B33 /* HomeFeedNodeController.swift in Sources */,
 				9B876E3C2115788B002D0B33 /* UIColor+Kitten.swift in Sources */,
 				9B876E3221156BBE002D0B33 /* User.swift in Sources */,
+				9B6B0DB32123D87200BB8BF9 /* Hero+Kitten.swift in Sources */,
 				9B876DF321155016002D0B33 /* AppDelegate.swift in Sources */,
 				9B876E2C21155D14002D0B33 /* KittenCellNode.swift in Sources */,
 				9B876E3A2115702F002D0B33 /* UserInfoNode.swift in Sources */,
-				9B876E2A21155B53002D0B33 /* KittenProvider.swift in Sources */,
+				9B6C238D2123F1E900129E2F /* KittenMainController.swift in Sources */,
+				9B6C238F2123F89D00129E2F /* UITabBar+Kitten.swift in Sources */,
+				9B6C238B2123E6EA00129E2F /* String+Kitten.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

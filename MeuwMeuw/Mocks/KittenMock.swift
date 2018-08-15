@@ -2,6 +2,12 @@ import Foundation
 import UIKit
 
 struct KittenMock {
+    static func me() -> User {
+        return User.init("Geektree0101",
+                         image: #imageLiteral(resourceName: "Geektree0101"),
+                         bio: "코코 집사입니다.\niOS Developer")
+    }
+    
     static func users() -> [User] {
         let images: [UIImage] = [#imageLiteral(resourceName: "eunha"), #imageLiteral(resourceName: "yuju"), #imageLiteral(resourceName: "sowon"), #imageLiteral(resourceName: "shinB"), #imageLiteral(resourceName: "EJ"), #imageLiteral(resourceName: "yerin"), #imageLiteral(resourceName: "IU"), #imageLiteral(resourceName: "sana")]
         let username: [String] = ["은하집사님",

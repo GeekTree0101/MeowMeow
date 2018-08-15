@@ -2,20 +2,22 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxOptional
+import RxCocoa_Texture
 
 class UserViewModel {
     var image: Observable<UIImage>
     var name: Observable<String>
     var bio: Observable<String>
     
+    let id: String
+    
     init(_ user: User) {
-        UserProvider.update(user)
+        id = user.username
+        ASModelSyncronizer.update(user)
         
-        let observable = UserProvider.observer
-            .filterNil()
+        let observable = ASModelSyncronizer
+            .observable(type: User.self, model: user)
             .startWith(user)
-            .filter { $0.username == user.username }
-            .asObservable()
             .share(replay: 1, scope: .whileConnected)
         
         image = observable.map { $0.profileImage}

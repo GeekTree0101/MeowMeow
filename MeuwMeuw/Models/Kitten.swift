@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import RxCocoa_Texture
 
 class Kitten {
     let id: String
@@ -19,5 +20,11 @@ class Kitten {
         self.title = title
         self.content = content
         self.user = user
+    }
+}
+
+extension Kitten: ASRenderModelProtocol {
+    var renderModelIdentifier: ASRenderModelIdentifier {
+        return .init(id, type: Kitten.self)
     }
 }

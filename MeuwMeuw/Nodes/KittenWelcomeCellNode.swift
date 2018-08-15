@@ -3,11 +3,19 @@ import AsyncDisplayKit
 import RxCocoa
 import RxSwift
 import RxCocoa_Texture
+import Hero
+
+extension Reactive where Base: KittenWelcomeCellNode {
+    var didTapProfile: Observable<UserViewModel?> {
+        return base.didTapUserRelay.observeOn(MainScheduler.instance)
+    }
+}
 
 class KittenWelcomeCellNode: ASCellNode {
     typealias Node = KittenWelcomeCellNode
     
     let titleNode = ASTextNode()
+    let didTapUserRelay = PublishRelay<UserViewModel?>()
     
     lazy var scrollNode: ASScrollNode = {
         let node = ASScrollNode()
@@ -30,14 +38,26 @@ class KittenWelcomeCellNode: ASCellNode {
     }
     
     var status: Status = .welcome
+    private let screenType: ScreenType
     
-    override init() {
+    enum ScreenType {
+        case home
+        case favoriteList
+    }
+    
+    init(screenType: ScreenType) {
+        self.screenType = screenType
         super.init()
         self.automaticallyManagesSubnodes = true
         self.selectionStyle = .none
         self.backgroundColor = .white
         self.isOpaque = true
-        self.bindViewModel()
+        switch screenType {
+        case .home:
+            self.bindViewModel()
+        case .favoriteList:
+            self.titleNode.attributedText = "집사님께서\n관심있는 고양이들 입니다.".attrText(Node.titleAttr)
+        }
     }
     
     func bindViewModel() {
@@ -48,24 +68,33 @@ class KittenWelcomeCellNode: ASCellNode {
         
         viewModel.userList.filterEmpty()
             .subscribe(onNext: { [weak self] users in
-                self?.userNodes = users
+                guard let `self` = self else { return }
+                self.userNodes = users
                     .map { userViewModel -> UserInfoNode in
                         let node = UserInfoNode(.compact)
+                        node.applyHero(.profile(userViewModel.id), modifier: [.fade, .scale(0.5)])
                         userViewModel.image
                             .bind(to: node.imageNode.rx.image,
-                                  setNeedsLayout: self?.scrollNode)
+                                  setNeedsLayout: self.scrollNode)
                             .disposed(by: node.disposeBag)
                         userViewModel.name
                             .bind(to: node.nameNode.rx.text(node.type.usernameAttr),
-                                  setNeedsLayout: self?.scrollNode)
+                                  setNeedsLayout: self.scrollNode)
                             .disposed(by: node.disposeBag)
+                        node.imageNode.rx.tap
+                            .map { [weak userViewModel] _ in
+                                return userViewModel
+                            }
+                            .bind(to: self.didTapUserRelay)
+                            .disposed(by: node.disposeBag)
+                        
                         return node
                 }
-                self?.viewModel.titleRelay.accept("최근에 소통하신\n집사님들입니다.")
-                self?.status = .showUserList
-                self?.transitionLayout(withAnimation: true,
-                                       shouldMeasureAsync: true,
-                                       measurementCompletion: nil)
+                self.viewModel.titleRelay.accept("최근에 소통하신\n집사님들입니다.")
+                self.status = .showUserList
+                self.transitionLayout(withAnimation: true,
+                                      shouldMeasureAsync: true,
+                                      measurementCompletion: nil)
             }).disposed(by: disposeBag)
         
         NotificationCenter.default.rx.notification(PawNode.didTapPawName)
@@ -95,11 +124,11 @@ class KittenWelcomeCellNode: ASCellNode {
                               child: scrollNode)
         
         return ASStackLayoutSpec(direction: .vertical,
-                                            spacing: 25.0,
-                                            justifyContent: .start,
-                                            alignItems: .stretch,
-                                            children: [titleInsetLayout,
-                                                       scrollNodeInsetLayout])
+                                 spacing: 25.0,
+                                 justifyContent: .start,
+                                 alignItems: .stretch,
+                                 children: [titleInsetLayout,
+                                            scrollNodeInsetLayout])
     }
     
     func scrollAreaLayoutSpec() -> ASLayoutSpec {
@@ -128,6 +157,7 @@ class KittenWelcomeCellNode: ASCellNode {
         super.didLoad()
         self.scrollNode.view.showsVerticalScrollIndicator = false
         self.scrollNode.view.showsHorizontalScrollIndicator = false
+        self.scrollNode.view.hero.modifiers = [.cascade]
     }
 }
 
