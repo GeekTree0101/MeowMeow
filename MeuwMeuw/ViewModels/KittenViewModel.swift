@@ -5,9 +5,9 @@ import RxOptional
 import RxCocoa_Texture
 
 class KittenViewModel {
-    var image: Observable<UIImage>
-    var title: Observable<String>
-    var content: Observable<String>
+    var image = BehaviorRelay<UIImage?>(value: nil)
+    var title = BehaviorRelay<String?>(value: nil)
+    var content = BehaviorRelay<String?>(value: nil)
     var isFavorite = BehaviorRelay<Bool>(value: false)
     var didTapFavorite = PublishRelay<Void>()
     
@@ -17,26 +17,36 @@ class KittenViewModel {
     
     init(_ kitten: Kitten) {
         self.id = kitten.id
-        ASModelSyncronizer.update(kitten)
+        KittenProvider.update(kitten)
         
         ratio = kitten.image.size.height / kitten.image.size.width
         
-        let observable = ASModelSyncronizer
-            .observable(type: Kitten.self, model: kitten)
+        let observable = KittenProvider.observer
             .startWith(kitten)
+            .filter { $0?.id == kitten.id }
+            .asObservable()
             .share(replay: 1, scope: .whileConnected)
         
-        image = observable.map { $0.image }
-        title = observable.map { $0.title }
-        content = observable.map { $0.content }
-        observable.map { $0.isFavorite }
+        observable.map { $0?.image }
+            .bind(to: image)
+            .disposed(by: disposeBag)
+        
+        observable.map { $0?.title }
+            .bind(to: title)
+            .disposed(by: disposeBag)
+        
+        observable.map { $0?.content }
+            .bind(to: content)
+            .disposed(by: disposeBag)
+        
+        observable.map { $0?.isFavorite ?? false }
             .bind(to: isFavorite)
             .disposed(by: disposeBag)
         
         didTapFavorite.withLatestFrom(observable)
             .subscribe(onNext: { kitten in
-                kitten.isFavorite = !kitten.isFavorite
-                ASModelSyncronizer.update(kitten)
+                kitten?.isFavorite = !(kitten?.isFavorite ?? false)
+                KittenProvider.update(kitten)
             }).disposed(by: disposeBag)
     }
 }

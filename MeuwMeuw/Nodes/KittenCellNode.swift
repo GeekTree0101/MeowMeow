@@ -72,16 +72,19 @@ class KittenCellNode: ASCellNode {
     func bindViewModel(_ viewModel: KittenViewModel) {
         viewModel.image
             .bind(to: imageNode.rx.image,
+                  directlyBind: true,
                   setNeedsLayout: self)
             .disposed(by: disposeBag)
         
         viewModel.title
             .bind(to: titleNode.rx.text(KittenCellNode.titleAttr),
+                  directlyBind: true,
                   setNeedsLayout: self)
             .disposed(by: disposeBag)
         
         viewModel.content
             .bind(to: contentNode.rx.text(KittenCellNode.contentAttr),
+                  directlyBind: true,
                   setNeedsLayout: self)
             .disposed(by: disposeBag)
         

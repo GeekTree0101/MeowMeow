@@ -12,6 +12,8 @@
 		9B6C238B2123E6EA00129E2F /* String+Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C238A2123E6EA00129E2F /* String+Kitten.swift */; };
 		9B6C238D2123F1E900129E2F /* KittenMainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C238C2123F1E900129E2F /* KittenMainController.swift */; };
 		9B6C238F2123F89D00129E2F /* UITabBar+Kitten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C238E2123F89D00129E2F /* UITabBar+Kitten.swift */; };
+		9B6C23982124F06E00129E2F /* KittenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C23972124F06E00129E2F /* KittenProvider.swift */; };
+		9B6C239A2124F09C00129E2F /* UserProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6C23992124F09C00129E2F /* UserProvider.swift */; };
 		9B876DF321155016002D0B33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876DF221155016002D0B33 /* AppDelegate.swift */; };
 		9B876DFD21155018002D0B33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B876DFB21155018002D0B33 /* LaunchScreen.storyboard */; };
 		9B876E0821155018002D0B33 /* MeuwMeuwTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B876E0721155018002D0B33 /* MeuwMeuwTests.swift */; };
@@ -53,6 +55,8 @@
 		9B6C238A2123E6EA00129E2F /* String+Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Kitten.swift"; sourceTree = "<group>"; };
 		9B6C238C2123F1E900129E2F /* KittenMainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenMainController.swift; sourceTree = "<group>"; };
 		9B6C238E2123F89D00129E2F /* UITabBar+Kitten.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBar+Kitten.swift"; sourceTree = "<group>"; };
+		9B6C23972124F06E00129E2F /* KittenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenProvider.swift; sourceTree = "<group>"; };
+		9B6C23992124F09C00129E2F /* UserProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProvider.swift; sourceTree = "<group>"; };
 		9B876DEF21155016002D0B33 /* MeuwMeuw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeuwMeuw.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B876DF221155016002D0B33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B876DFC21155018002D0B33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -107,6 +111,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9B6C23942124F04600129E2F /* ModelProvider */ = {
+			isa = PBXGroup;
+			children = (
+				9B6C23972124F06E00129E2F /* KittenProvider.swift */,
+				9B6C23992124F09C00129E2F /* UserProvider.swift */,
+			);
+			path = ModelProvider;
+			sourceTree = "<group>";
+		};
 		9B876DE621155016002D0B33 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +143,7 @@
 		9B876DF121155016002D0B33 /* MeuwMeuw */ = {
 			isa = PBXGroup;
 			children = (
+				9B6C23942124F04600129E2F /* ModelProvider */,
 				9B876E25211559BA002D0B33 /* ViewModels */,
 				9B876E2021155367002D0B33 /* Extensions */,
 				9B876E1521155279002D0B33 /* Nodes */,
@@ -388,10 +402,12 @@
 			files = (
 				9B876E302115666E002D0B33 /* KittenWelcomeCellNode.swift in Sources */,
 				9B876E1D21155318002D0B33 /* KittenShowNodeController.swift in Sources */,
+				9B6C23982124F06E00129E2F /* KittenProvider.swift in Sources */,
 				9B876E3821156F80002D0B33 /* KittenWelcomCellViewModel.swift in Sources */,
 				9B876E27211559CA002D0B33 /* KittenViewModel.swift in Sources */,
 				9B876E4021157DF1002D0B33 /* UIImage+Kitten.swift in Sources */,
 				9B876E19211552DB002D0B33 /* FavoriteFeedNodeController.swift in Sources */,
+				9B6C239A2124F09C00129E2F /* UserProvider.swift in Sources */,
 				9B876E1F2115533F002D0B33 /* Kitten.swift in Sources */,
 				9B876E3621156ED9002D0B33 /* UserViewModel.swift in Sources */,
 				9B876E2421155522002D0B33 /* KittenMock.swift in Sources */,

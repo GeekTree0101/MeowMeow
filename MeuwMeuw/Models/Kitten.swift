@@ -22,9 +22,3 @@ class Kitten {
         self.user = user
     }
 }
-
-extension Kitten: ASRenderModelProtocol {
-    var renderModelIdentifier: ASRenderModelIdentifier {
-        return .init(id, type: Kitten.self)
-    }
-}

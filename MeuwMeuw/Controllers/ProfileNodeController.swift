@@ -46,15 +46,18 @@ class ProfileNodeController: ASViewController<ASDisplayNode> {
         super.viewDidLoad()
         viewModel.name
             .bind(to: userInfoNode.nameNode.rx.text(UserConst.profile.usernameAttr),
+                  directlyBind: true,
                   setNeedsLayout: self.node)
             .disposed(by: disposeBag)
         
         viewModel.image
-            .bind(to: userInfoNode.imageNode.rx.image)
+            .bind(to: userInfoNode.imageNode.rx.image,
+                  directlyBind: true)
             .disposed(by: disposeBag)
         
         viewModel.bio
             .bind(to: userInfoNode.bioNode.rx.text(UserConst.profile.bioAttr),
+                  directlyBind: true,
                   setNeedsLayout: self.node)
             .disposed(by: disposeBag)
         

@@ -13,9 +13,3 @@ class User {
         self.bio = bio
     }
 }
-
-extension User: ASRenderModelProtocol {
-    var renderModelIdentifier: ASRenderModelIdentifier {
-        return .init(username, type: User.self)
-    }
-}

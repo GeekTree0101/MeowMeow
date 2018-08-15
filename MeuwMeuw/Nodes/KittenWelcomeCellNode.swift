@@ -75,10 +75,12 @@ class KittenWelcomeCellNode: ASCellNode {
                         node.applyHero(.profile(userViewModel.id), modifier: [.fade, .scale(0.5)])
                         userViewModel.image
                             .bind(to: node.imageNode.rx.image,
+                                  directlyBind: true,
                                   setNeedsLayout: self.scrollNode)
                             .disposed(by: node.disposeBag)
                         userViewModel.name
                             .bind(to: node.nameNode.rx.text(node.type.usernameAttr),
+                                  directlyBind: true,
                                   setNeedsLayout: self.scrollNode)
                             .disposed(by: node.disposeBag)
                         node.imageNode.rx.tap
